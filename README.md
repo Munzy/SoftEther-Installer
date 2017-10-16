@@ -1,11 +1,9 @@
 # SoftEther-Installer
-Script to install SoftEther VPN Server/Bridge
 
-Download or copy this script in to linux server.
-Chmod the file to allow executable.
-run in terminal below command
-
-./install.sh
+Install:
+```
+wget --no-check-certificate -qO- "https://git.enjen.net/munzy/SoftEther-Installer/raw/master/install.sh" | bash
+```
 
 Currently tested on:
-  1. Debian Arm Server(C1) on Scaleway.
+  Debian (8.0)
