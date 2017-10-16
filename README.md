@@ -12,6 +12,4 @@ Currently tested on:
 
 Currently does not work on:
 
-  Debian 9 -- Softether fails on make.
-  
-  https://github.com/SoftEtherVPN/SoftEtherVPN/issues/301
+  Debian 9 -- Softether fails on make: https://github.com/SoftEtherVPN/SoftEtherVPN/issues/301
