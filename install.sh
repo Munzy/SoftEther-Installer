@@ -126,13 +126,11 @@ chmod 700 vpncmd
 
 mkdir /var/lock/subsys
 
-echo "
-#!/bin/sh
+echo "#!/bin/sh
 # chkconfig: 2345 99 01
 # description: SoftEther VPN Server
 DAEMON=/usr/local/vpnserver/vpnserver
 LOCK=/var/lock/subsys/vpnserver
-
 test -x \$DAEMON || exit 0
 case \"\$1\" in
 start)
@@ -154,7 +152,6 @@ exit 1
 esac
 exit 0
 " > /etc/init.d/vpnserver
-
 
 chmod 755 /etc/init.d/vpnserver
 if [[ ${installOS} == "cent" ]];then
