@@ -5,6 +5,11 @@
 ## Install:
 
 ```
+wget --no-check-certificate -qO- "https://raw.githubusercontent.com/Munzy/SoftEther-Installer/master/install.sh" | bash
+```
+
+Alternative Download: (IPv6 Supporting)
+```
 wget --no-check-certificate -qO- "https://git.enjen.net/munzy/SoftEther-Installer/raw/master/install.sh" | bash
 ```
 
@@ -30,7 +35,8 @@ wget --no-check-certificate -qO- "https://git.enjen.net/munzy/SoftEther-Installe
 
 ## Currently does not work on:
 
-  Debian 9 -- Softether fails on make: https://github.com/SoftEtherVPN/SoftEtherVPN/issues/301
+  - Debian 9 -- Softether fails on make: https://github.com/SoftEtherVPN/SoftEtherVPN/issues/301
+  - Ubuntu 17.04 -- Same as Debian 9.
   
 ## Bugs
   
