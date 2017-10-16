@@ -2,7 +2,6 @@
 
 latest="v4.22-9634-beta-2016.11.27"
 lateststable="v4.20-9608-rtm-2016.04.17"
-initfile="vpnserver"
 installURL="http://www.softether-download.com/files/softether/"
 installURLPath='-tree/Linux/SoftEther_VPN_Server/'
 
@@ -131,39 +130,39 @@ echo "
 #!/bin/sh
 # chkconfig: 2345 99 01
 # description: SoftEther VPN Server
-DAEMON=/usr/local/vpnserver/${initfile}
-LOCK=/var/lock/subsys/${initfile}
+DAEMON=/usr/local/vpnserver/vpnserver
+LOCK=/var/lock/subsys/vpnserver
 
-test -x $DAEMON || exit 0
-case "$1" in
+test -x \$DAEMON || exit 0
+case \"\$1\" in
 start)
-$DAEMON start
-touch $LOCK
+\$DAEMON start
+touch \$LOCK
 ;;
 stop)
-$DAEMON stop
-rm $LOCK
+\$DAEMON stop
+rm \$LOCK
 ;;
 restart)
-$DAEMON stop
+\$DAEMON stop
 sleep 3
-$DAEMON start
+\$DAEMON start
 ;;
 *)
-echo \"Usage: $0 {start|stop|restart}\"
+echo \"Usage: \$0 {start|stop|restart}\"
 exit 1
 esac
 exit 0
-" > /etc/init.d/${initfile}
+" > /etc/init.d/vpnserver
 
 
-chmod 755 /etc/init.d/${initfile}
+chmod 755 /etc/init.d/vpnserver
 if [[ ${installOS} == "cent" ]];then
-	chkconfig --add ${initfile} 
-	/etc/init.d/${initfile} start
+	chkconfig --add vpnserver
+	/etc/init.d/vpnserver start
 elif [ ${installOS} == "deb" ];then
-	update-rc.d ${initfile} defaults
-	/etc/init.d/${initfile} start
+	update-rc.d vpnserver defaults
+	/etc/init.d/vpnserver start
 fi
 
 rm /tmp/${installFile}
