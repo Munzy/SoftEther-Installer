@@ -24,8 +24,8 @@ wget --no-check-certificate -qO- "https://git.enjen.net/munzy/SoftEther-Installe
 
 ## Currently tested on:
 
-  Debian 8(x64)
-  Centos 7(x64)
+ - Debian 8(x64)
+ - Centos 7(x64)
 
 
 ## Currently does not work on:
