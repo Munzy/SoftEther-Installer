@@ -28,7 +28,8 @@ echo "
 
 "
 
-read -p "Please choose from the above options!\n" installArchINPUT </dev/tty
+read -p "Please choose from the above options!
+" installArchINPUT </dev/tty
 
 echo "
 ####################################################
@@ -40,7 +41,8 @@ echo "
 	
 "
 
-read -p "Please choose your current operating system!\n" installOSINPUT </dev/tty
+read -p "Please choose your current operating system!
+" installOSINPUT </dev/tty
 
 echo "
 ####################################################
@@ -52,7 +54,8 @@ echo "
 	
 "
 
-read -p "Please choose the build type you would like!\n" installBuildINPUT </dev/tty
+read -p "Please choose the build type you would like!
+" installBuildINPUT </dev/tty
 
 clear
 
