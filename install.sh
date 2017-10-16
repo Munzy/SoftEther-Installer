@@ -17,7 +17,7 @@ echo "
 ####################################################
 
 	Heavily Modified By: Munzy
-	Original Script By: AhmadShamli.
+	Original Script By: AhmadShamli
 
 ####################################################
 #	Select Architectures
