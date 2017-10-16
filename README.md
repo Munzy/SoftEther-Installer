@@ -29,7 +29,7 @@ wget --no-check-certificate -qO- "https://git.enjen.net/munzy/SoftEther-Installe
 
 ## Currently tested on:
 
- - Ubunutu 16.04(x64)
+ - Ubuntu 16.04(x64)
  - Debian 8(x64)
  - Centos 7(x64)
 
