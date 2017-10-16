@@ -160,10 +160,14 @@ chmod 755 /etc/init.d/vpnserver
 
 if [[ ${installOS} == "cent" ]];then
 	chkconfig --add vpnserver
+	/etc/init.d/vpnserver start
+	sleep 15
 	/etc/init.d/vpnserver stop
 	/etc/init.d/vpnserver start
 elif [ ${installOS} == "deb" ];then
 	update-rc.d vpnserver defaults
+	/etc/init.d/vpnserver start
+	sleep 15
 	/etc/init.d/vpnserver stop
 	/etc/init.d/vpnserver start
 fi
@@ -181,7 +185,7 @@ echo "
 	3. Type ServerPasswordSet in the console, and set your password.
 	4. Once you finished setting the password, logout of the console with quit.
 	5. The service name is vpnserver. Alas server vpnserver restart.
-	6. Launch SE-VPN Server Manager on your desktop and configure your se server.
+	6. Launch SE-VPN Server Manager on your desktop and configure your SE server.
 	
 	Donations appreciated: 
 	https://www.cameronmunroe.com/coffee/
