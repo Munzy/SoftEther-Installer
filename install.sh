@@ -15,12 +15,14 @@ echo "
 ####################################################
 #	SoftEther Install Script
 ####################################################
+
 	Heavily Modified By: Munzy
 	Original Script By: AhmadShamli.
 
 ####################################################
 #	Select Architectures
 ####################################################
+
 	1. Intel x64/AMD64 	(64bit)
 	2. Intel x86 		(32bit)
 	3. ARM EABI 		(32bit)
@@ -33,6 +35,7 @@ echo "
 ####################################################
 #	Operating Systems
 ####################################################
+
 	1. Debian/Ubuntu
 	2. CentOS/Fedora
 	
