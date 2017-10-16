@@ -1,148 +1,136 @@
 #!/bin/bash
 
-latest="v4.22-9634-beta"
+latest="v4.22-9634-beta-2016.11.27"
 lateststable="v4.20-9608-rtm-2016.04.17"
-#Release Date: 2015-10-19
-initfile="vpnserver2"
+initfile="vpnserver"
+installURL="http://www.softether-download.com/files/softether/"
+installURLPath='-tree/Linux/SoftEther_VPN_Server/'
 
-echo "--------------------------------------------------------------------"
-echo "SoftEther VPN Server Install script"
-echo "By AhmadShamli"
-echo "http://github.com/AhmadShamli"
-echo "http://AhmadShamli.com"
-echo "credit: DigitalOcean and StackOverflow"
-echo "https://www.digitalocean.com/community/tutorials/how-to-setup-a-multi-protocol-vpn-server-using-softether"
-echo "--------------------------------------------------------------------"
-echo "--------------------------------------------------------------------"
-echo
-echo "Select Architecture"
-echo
-echo " 1. Arm EABI (32bit)"
-echo " 2. Intel x86 (32bit)"
-echo " 3. Intel x64/AMD64 (64bit)"
-echo
-echo "Please choose architecture: "
-read tmp
-echo
-
-if test "$tmp" = "3"
-then
-	arch="64bit_-_Intel_x64_or_AMD64"
-	arch2="x64-64bit"
-	echo "Selected : 1 " $arch
-elif test "$tmp" = "2"
-then
-	arch="32bit_-_Intel_x86"
-	arch2="x86-32bit"
-	echo "Selected : 2 " $arch
-elif test "$tmp" = "1"
-then
-	arch="32bit_-_ARM_EABI"
-	arch2="arm_eabi-32bit"
-	echo "Selected : 3 " $arch
-else #default if non selected
-	arch="32bit_-_Intel_x86"
-	arch2="x86-32bit"
-	echo "Selected : 2 " $arch
+if [[ $EUID -ne 0 ]]; then
+   echo "Please run me as a root/sudo'ed user, exiting." 
+   exit 1
 fi
 
-echo "--------------------------------------------------------------------"
-echo
-echo "Select OS"
-echo
-echo " 1. Debian/Ubuntu"
-echo " 2. CentOS/Fedora"
-echo
-echo "Please choose OS: "
-read tmp
-echo
+echo "
+####################################################
+#	SoftEther Install Script
+####################################################
+	Heavily Modified By: Munzy
+	Original Script By: AhmadShamli.
 
-if test "$tmp" = "2"
-then
-	os="cent"
-	echo "Selected : 2 CentOS/Fedora"
+####################################################
+#	Select Architectures
+####################################################
+	1. Intel x64/AMD64 	(64bit)
+	2. Intel x86 		(32bit)
+	3. ARM EABI 		(32bit)
+
+"
+
+read -p "Please choose from the above options!" installArchINPUT </dev/tty
+
+echo "
+####################################################
+#	Operating Systems
+####################################################
+	1. Debian/Ubuntu
+	2. CentOS/Fedora
+	
+"
+
+read -p "Please choose your current operating system!" installOSINPUT </dev/tty
+
+echo "
+####################################################
+#	Build
+####################################################
+
+	1. Stable
+	2. Newest (alpha, beta, release canidates)
+	
+"
+
+read -p "Please choose the build type you would like!" installBuildINPUT </dev/tty
+
+clear
+
+
+if [[ ${installArchINPUT} == 1 ]]; then
+	installArchLong="64bit_-_Intel_x64_or_AMD64"
+	installArchShort="x64-64bit"	
+elif [[ ${installArchINPUT} == 2 ]]; then
+	installArchLong="32bit_-_Intel_x86"
+	installArchShort="x86-32bit"
+elif [[ ${installArchINPUT} == 3 ]]; then
+	installArchLong="32bit_-_ARM_EABI"
+	installArchShort="arm_eabi-32bit"
 else
-	os="deb"
-	echo "Selected : 1 Debian/Ubuntu"
+	echo "Architecture wasn't properly selected, exiting."
+	exit 1
 fi
 
-echo "--------------------------------------------------------------------"
-echo
-echo "Select build"
-echo
-echo " 1. latest(might include beta/rc)"
-echo " 2. latest stable"
-echo
-echo "Please choose build: "
-read tmp
-echo
 
-if test "$tmp" = "2"
-then
-	version="$lateststable"
-	echo "Latest stable selected: 2 "$lateststable
-else
-	version="$latest"
-	echo "Latest build(stable/beta) selected: 1 "$latest
-fi
-
-file="softether-vpnserver-"$version"-linux-"$arch2".tar.gz"
-link="http://www.softether-download.com/files/softether/"$version"-tree/Linux/SoftEther_VPN_Server/"$arch"/"$file
-
-if [ ! -s "$file" ]||[ ! -r "$file" ];then
-	#remove and redownload empty or unreadable file
-	rm -f "$link"
-	wget "$link"
-elif [ ! -f "file" ];then
-	#download if not exist
-	wget "$file"
-fi
-
-if [ -f "$file" ];then
-	tar xzf "$file"
-	dir=$(pwd)
-	echo "current dir " $dir
-	cd vpnserver
-	dir=$(pwd)
-	echo "changed to dir " $dir
-else
-	echo "Archive not found. Please rerun this script or check permission."
-	break
-fi
-
-if [ "$os" -eq "cent" ];then
+if [[ ${installOSINPUT} == 1 ]]; then
+	installOS='deb'
+	apt-get update
+	apt-get install build-essential -y
+elif [[ ${installOSINPUT} == 2 ]]; then
+	installOS='cent'
 	yum upgrade
 	yum groupinstall "Development Tools" gcc
 else
-	apt-get update && apt-get upgrade
-	apt-get install build-essential -y
+	echo "OS wasn't properly selected, exiting."
+	exit 1
 fi
+
+
+if [[ ${installBuildINPUT} == 1 ]]; then
+	installBuild=${lateststable}
+elif [[ ${installBuildINPUT} == 2 ]]; then
+	installBuild=${latest}
+else
+	echo "Build wasn't properly selected, exiting."
+	exit 1
+fi
+
+
+installFile="softether-vpnserver-${installBuild}-linux-${installArchShort}.tar.gz"
+installURLFull=${installURL}${installBuild}${installURLPath}${installArchLong}/${installFile}
+
+echo "Changing to /tmp to download files."
+cd /tmp/
+
+
+wget --content-disposition "${installURLFull}"
+
+if [ -f ${installFile} ];then
+	tar xzf ${installFile}
+	cd vpnserver
+else
+	echo "OOOPS! We didn't download the file, or can't find it, exiting."
+	exit 1
+fi
+
 	
 make
 cd ..
 mv vpnserver /usr/local
-dir=$(pwd)
-echo "current dir " $dir
 cd /usr/local/vpnserver/
-dir=$(pwd)
-echo "changed to dir " $dir
+
 chmod 600 *
 chmod 700 vpnserver
 chmod 700 vpncmd
 
 mkdir /var/lock/subsys
 
-touch /etc/init.d/"$initfile"
-#need to cat two time to pass varible($initfile) value inside
-cat > /etc/init.d/"$initfile" <<EOF
+touch /etc/init.d/${initfile}
+echo "
 #!/bin/sh
 # chkconfig: 2345 99 01
 # description: SoftEther VPN Server
-DAEMON=/usr/local/vpnserver/$initfile
-LOCK=/var/lock/subsys/$initfile
-EOF
+DAEMON=/usr/local/vpnserver/${initfile}
+LOCK=/var/lock/subsys/${initfile}
 
-cat >> /etc/init.d/"$initfile" <<'EOF'
 test -x $DAEMON || exit 0
 case "$1" in
 start)
@@ -163,30 +151,35 @@ echo "Usage: $0 {start|stop|restart}"
 exit 1
 esac
 exit 0
-EOF
+" > /etc/init.d/${initfile}
 
-chmod 755 /etc/init.d/"$initfile"
-if [ "$os" -eq "cent" ];then
-	chkconfig --add "$initfile" 
-	/etc/init.d/"$initfile" start
-else
-	update-rc.d "$initfile" defaults
-	/etc/init.d/"$initfile" start
+
+chmod 755 /etc/init.d/${initfile}
+if [[ ${installOS} == "cent" ]];then
+	chkconfig --add ${initfile} 
+	/etc/init.d/${initfile} start
+elif [ ${installOS} == "deb" ];then
+	update-rc.d ${initfile} defaults
+	/etc/init.d/${initfile} start
 fi
+
+
+
+echo "
+####################################################
+#	Install Complete!
+####################################################
+
+	1. Please launch /usr/local/vpnserver/vpncmd in terminal.
+	2. Press 1 and fill the rest of the requested fields with nothing.
+	3. Type ServerPasswordSet in the console, and set your password.
+	4. Once you finished setting the password, logout of the console with quit.
+	5. The service name is vpnserver. Alas server vpnserver restart.
+	6. Launch SE-VPN Server Manager on your desktop and configure your se server.
 	
+	Donations appreciated: 
+	https://www.cameronmunroe.com/coffee/
 
+"	
 
-echo "--------------------------------------------------------------------"
-echo "--------------------------------------------------------------------"
-echo "Installation done. Hurray."
-echo "Now you may want to change VPN server password."
-echo "Run in terminal:"
-echo "./vpncmd"
-echo "Press 1 to select \"Management of VPN Server or VPN Bridge\","
-echo "then press Enter without typing anything to connect to the "
-echo "localhost server, and again press Enter without inputting "
-echo "anything to connect to server by server admin mode."
-echo "Then use command below to change admin password:"
-echo "ServerPasswordSet"
-echo "Done...."
 
