@@ -7,11 +7,12 @@ wget --no-check-certificate -qO- "https://git.enjen.net/munzy/SoftEther-Installe
 ```
 
 ## Get Your Own VM!
-  Vultr! You can get a $2.50/month server. It includes 500GB/month of bandwidth! 
+  Vultr! You can get a vm for as low as $2.50/month server. It includes 500GB/month of bandwidth! 
   
-  They have locations in: 
+  They have locations in: Miami, Atlanta, Chicago, Silican Valley, Dallas, Los Angeles, New York, Seattle, London, Frankfurt, Paris, Amsterdam, Tokyo, Singaport, and Sydney.
   
-  ![https://www.vultr.com/?ref=6802596](https://www.vultr.com/media/banner_1.png)
+  [Get your Vultr VM now!](https://www.vultr.com/?ref=6802596)
+  
   
 
 ## Currently tested on:
