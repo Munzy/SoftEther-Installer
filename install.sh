@@ -77,10 +77,11 @@ if [[ ${installOSINPUT} == 1 ]]; then
 	installOS='deb'
 	apt-get update
 	apt-get install build-essential -y
+	apt-get install wget -y
 elif [[ ${installOSINPUT} == 2 ]]; then
 	installOS='cent'
-	yum upgrade
-	yum groupinstall "Development Tools" gcc
+	yum install gcc make -y
+    yum install wget -y
 else
 	echo "OS wasn't properly selected, exiting."
 	exit 1
