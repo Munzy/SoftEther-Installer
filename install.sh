@@ -116,7 +116,7 @@ else
 fi
 
 	
-make
+make </dev/tty
 cd ..
 mv vpnserver /usr/local
 cd /usr/local/vpnserver/
@@ -167,6 +167,7 @@ elif [ ${installOS} == "deb" ];then
 	/etc/init.d/${initfile} start
 fi
 
+rm /tmp/${installFile}
 
 
 echo "
