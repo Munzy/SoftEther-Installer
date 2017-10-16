@@ -120,7 +120,7 @@ fi
 	
 make </dev/tty
 cd ..
-mv vpnserver /usr/local
+cp -r vpnserver /usr/local/
 cd /usr/local/vpnserver/
 
 chmod 600 *
@@ -169,6 +169,7 @@ elif [ ${installOS} == "deb" ];then
 fi
 
 rm /tmp/${installFile}
+rm -rf /tmp/vpnserver
 
 
 echo "
@@ -187,5 +188,4 @@ echo "
 	https://www.cameronmunroe.com/coffee/
 
 "	
-
 
