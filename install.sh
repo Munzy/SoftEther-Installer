@@ -28,7 +28,7 @@ echo "
 
 "
 
-read -p "Please choose from the above options!
+read -p "Please choose from the above options:
 " installArchINPUT </dev/tty
 
 echo "
@@ -41,7 +41,7 @@ echo "
 	
 "
 
-read -p "Please choose your current operating system!
+read -p "Please choose your current operating system:
 " installOSINPUT </dev/tty
 
 echo "
@@ -54,7 +54,7 @@ echo "
 	
 "
 
-read -p "Please choose the build type you would like!
+read -p "Please choose the build type you would like:
 " installBuildINPUT </dev/tty
 
 clear
