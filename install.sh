@@ -157,18 +157,14 @@ exit 0" > /etc/init.d/vpnserver
 
 chmod 755 /etc/init.d/vpnserver
 
+chmod +x /etc/init.d/vpnserver
+
 
 if [[ ${installOS} == "cent" ]];then
 	chkconfig --add vpnserver
 	/etc/init.d/vpnserver start
-	sleep 15
-	/etc/init.d/vpnserver stop
-	/etc/init.d/vpnserver start
 elif [ ${installOS} == "deb" ];then
 	update-rc.d vpnserver defaults
-	/etc/init.d/vpnserver start
-	sleep 15
-	/etc/init.d/vpnserver stop
 	/etc/init.d/vpnserver start
 fi
 
