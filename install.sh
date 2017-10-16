@@ -129,8 +129,8 @@ mkdir /var/lock/subsys
 echo "#!/bin/sh
 # chkconfig: 2345 99 01
 # description: SoftEther VPN Server
-DAEMON=/usr/local/vpnserver/vpnserver
-LOCK=/var/lock/subsys/vpnserver
+DAEMON=\"/usr/local/vpnserver/vpnserver\"
+LOCK=\"/var/lock/subsys/vpnserver\"
 test -x \$DAEMON || exit 0
 case \"\$1\" in
 start)
