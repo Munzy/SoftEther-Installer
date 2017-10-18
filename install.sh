@@ -5,6 +5,7 @@ lateststable="v4.20-9608-rtm-2016.04.17"
 installURL="http://www.softether-download.com/files/softether/"
 installURLPath='-tree/Linux/SoftEther_VPN_Server/'
 
+
 if [[ $EUID -ne 0 ]]; then
    echo "Please run me as a root/sudo'ed user, exiting." 
    exit 1
@@ -117,8 +118,23 @@ else
 	exit 1
 fi
 
-	
-make </dev/tty
+installOPENSSL=`openssl version`
+if [ ${installOPENSSL} == "OpenSSL 1.1.*" ] && [ ${installOSINPUT} == 1 ]then;
+    apt-get install zlib1g-dev libncurses5-dev libssl1.0-dev build-essential libreadline-dev git -y
+    ldconfig
+    cd /tmp/vpnserver/src/Mayaqua
+    mv Network.c Network.c.orig
+    cat Network.c.orig | sed ‘s!SSLv3_method!SSLv23_client_method!g’ > Network.c
+    cd /tmp/vpnserver
+    ./configure
+    make </dev/tty
+
+else
+    make </dev/tty
+
+fi
+
+
 cd ..
 cp -r vpnserver /usr/local/
 cd /usr/local/vpnserver/
