@@ -63,7 +63,7 @@ clear
 
 installOPENSSL=`openssl version`
 if [[ ${installOPENSSL} == "OpenSSL 1.1.*" ]];then
-
+    echo "Error! Maybe bad SSL version."
 fi
 
 if [[ ${installArchINPUT} == 1 ]]; then
