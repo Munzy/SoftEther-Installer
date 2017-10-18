@@ -61,6 +61,11 @@ read -p "Please choose the build type you would like:
 clear
 
 
+installOPENSSL=`openssl version`
+if [[ ${installOPENSSL} == "OpenSSL 1.1.*" ]];then
+
+fi
+
 if [[ ${installArchINPUT} == 1 ]]; then
 	installArchLong="64bit_-_Intel_x64_or_AMD64"
 	installArchShort="x64-64bit"	
@@ -118,23 +123,7 @@ else
 	exit 1
 fi
 
-installOPENSSL=`openssl version`
-if ([ ${installOPENSSL} == "OpenSSL 1.1.*" ] && [ ${installOSINPUT} == 1 ])then;
-    apt-get install zlib1g-dev libncurses5-dev libssl1.0-dev build-essential libreadline-dev git -y
-    ldconfig
-    cd /tmp/vpnserver/src/Mayaqua
-    mv Network.c Network.c.orig
-    cat Network.c.orig | sed ‘s!SSLv3_method!SSLv23_client_method!g’ > Network.c
-    cd /tmp/vpnserver
-    ./configure
-    make </dev/tty
-
-else
-    make </dev/tty
-
-fi
-
-
+make </dev/tty
 cd ..
 cp -r vpnserver /usr/local/
 cd /usr/local/vpnserver/
