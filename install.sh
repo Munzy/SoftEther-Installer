@@ -60,12 +60,6 @@ read -p "Please choose the build type you would like:
 
 clear
 
-
-installOPENSSL=`openssl version`
-if [[ ${installOPENSSL} == "OpenSSL 1.1.*" ]];then
-    echo "Error! Maybe bad SSL version."
-fi
-
 if [[ ${installArchINPUT} == 1 ]]; then
 	installArchLong="64bit_-_Intel_x64_or_AMD64"
 	installArchShort="x64-64bit"	
