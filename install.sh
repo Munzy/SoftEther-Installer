@@ -119,7 +119,7 @@ else
 fi
 
 installOPENSSL=`openssl version`
-if [ ${installOPENSSL} == "OpenSSL 1.1.*" ] && [ ${installOSINPUT} == 1 ]then;
+if ([ ${installOPENSSL} == "OpenSSL 1.1.*" ] && [ ${installOSINPUT} == 1 ])then;
     apt-get install zlib1g-dev libncurses5-dev libssl1.0-dev build-essential libreadline-dev git -y
     ldconfig
     cd /tmp/vpnserver/src/Mayaqua
