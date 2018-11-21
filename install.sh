@@ -1,7 +1,7 @@
 #!/bin/bash
 
-latest="v4.22-9634-beta-2016.11.27"
-lateststable="v4.20-9608-rtm-2016.04.17"
+latest="v4.28-9669-beta-2018.09.11"
+lateststable="v4.25-9656-rtm-2018.01.15"
 installURL="http://www.softether-download.com/files/softether/"
 installURLPath='-tree/Linux/SoftEther_VPN_Server/'
 
