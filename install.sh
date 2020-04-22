@@ -1,6 +1,6 @@
 #!/bin/bash
 
-latest="v4.29-9680-rtm-2019.02.28"
+latest="v4.34-9745-beta-2020.04.05"
 lateststable="v4.29-9680-rtm-2019.02.28"
 installURL="http://www.softether-download.com/files/softether/"
 installURLPath='-tree/Linux/SoftEther_VPN_Server/'

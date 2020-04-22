@@ -8,10 +8,6 @@
 wget --no-check-certificate -qO- "https://raw.githubusercontent.com/Munzy/SoftEther-Installer/master/install.sh" | bash
 ```
 
-Alternative Download: (IPv6 Supporting)
-```
-wget --no-check-certificate -qO- "https://git.enjen.net/munzy/SoftEther-Installer/raw/master/install.sh" | bash
-```
 
 ## Get Your Own VM!
   Vultr! You can get a vm for as low as $2.50/month server. It includes 500GB/month of bandwidth! 
